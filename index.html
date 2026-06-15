@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สยามปฏิมา - ตลาดนัดพระเครื่องออนไลน์</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amulet: {
+                            dark: '#0f0d0a',
+                            panel: '#1a1612',
+                            gold: '#d4af37',
+                            goldlight: '#f3e5ab',
+                            bronze: '#cd7f32',
+                            accent: '#e6c35c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Sarabun & Charm -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #0f0d0a;
+        }
+        .thai-title {
+            font-family: 'Charm', cursive;
+        }
+        /* Custom scrollbar for premium look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0d0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+        /* Gold glowing effect for VIP */
+        .vip-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            background: linear-gradient(145deg, #1f1a14, #2d2419);
+        }
+        .vip-badge {
+            background: linear-gradient(90deg, #d4af37, #f3e5ab, #cd7f32);
+            animation: shine 3s infinite linear;
+            background-size: 200% auto;
+        }
+        @keyframes shine {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+        /* Style for Ad Slots */
+        .ad-container {
+            background: linear-gradient(180deg, #151310 0%, #1c1813 100%);
+            border: 1px dashed rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+        .ad-container:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen">
+
+    <!-- ส่วนหัวเว็บไซต์ (Header) -->
+    <header class="border-b border-amulet-gold/20 bg-amulet-dark/95 sticky top-0 z-40 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <!-- โลโก้จำลองพระเครื่อง -->
+                <div class="w-12 h-12 rounded-full border-2 border-amulet-gold flex items-center justify-center bg-gradient-to-br from-amulet-panel to-amulet-dark vip-glow">
+                    <svg class="w-8 h-8 text-amulet-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.905 0-5.64-.788-8-2.164m16 0a9 9 0 00-16 0" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="thai-title text-3xl font-bold text-amulet-gold leading-none tracking-wide">สยามปฏิมา</h1>
+                    <p class="text-xs text-gray-400 mt-1">ตลาดกลางพระเครื่องออนไลน์ โพสต์ฟรี มั่นใจ ปลอดภัย</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2 flex-wrap justify-center">
+                <!-- ปุ่มเปลี่ยนโหมดแอดมิน -->
+                <button id="admin-toggle-btn" onclick="openAdminLoginModal()" class="bg-gray-800 hover:bg-gray-700 text-amulet-gold border border-amulet-gold/30 font-semibold px-4 py-2.5 rounded-lg text-sm transition duration-300 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-amulet-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <span>ระบบแอดมิน</span>
+                </button>
+
+                <button onclick="scrollToForm()" class="bg-gradient-to-r from-amulet-gold to-yellow-600 hover:from-yellow-600 hover:to-amulet-gold text-amulet-dark font-semibold px-5 py-2.5 rounded-lg shadow-lg hover:shadow-amulet-gold/20 transition duration-300 flex items-center gap-2 text-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    ลงประกาศพระเครื่องฟรี
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- พื้นที่แสดงสถิติย่อย -->
+    <section class="max-w-7xl mx-auto px-4 mt-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-amulet-panel border border-amulet-gold/10 p-4 rounded-xl">
+            <div class="text-center p-2 border-r border-amulet-gold/10 last:border-0">
+                <span class="text-xs text-gray-400 block mb-1">พระเครื่องทั้งหมด</span>
+                <span id="stat-total" class="text-xl font-bold text-amulet-gold">0</span> <span class="text-xs">องค์</span>
+            </div>
+            <div class="text-center p-2 border-r border-amulet-gold/10 last:border-0">
+                <span class="text-xs text-gray-400 block mb-1">พระเครื่อง VIP พรีเมียม</span>
+                <span id="stat-vip" class="text-xl font-bold text-green-400">0</span> <span class="text-xs">องค์</span>
+            </div>
+            <div class="text-center p-2 border-r border-amulet-gold/10 last:border-0">
+                <span class="text-xs text-gray-400 block mb-1">ผู้ชมวันนี้</span>
+                <span class="text-xl font-bold text-blue-400">2,540</span> <span class="text-xs">ครั้ง</span>
+            </div>
+            <div class="text-center p-2 last:border-0">
+                <span class="text-xs text-gray-400 block mb-1">สถานะระบบ</span>
+                <span class="text-sm font-semibold text-emerald-400 flex items-center justify-center gap-1">
+                    <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full inline-block animate-pulse"></span> ออนไลน์
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- พื้นที่แสดงป้ายสปอนเซอร์/AdSense ส่วนบน (Banner Leaderboard Ads) -->
+    <section class="max-w-7xl mx-auto px-4 mt-6">
+        <div id="main-ad-slot" class="ad-container rounded-2xl p-4 overflow-hidden text-center relative">
+            <span class="absolute top-2 right-3 text-[9px] text-gray-600 tracking-wider uppercase">Sponsored / Ads</span>
+            <div id="ad-content-wrapper" class="flex items-center justify-center min-h-[90px]">
+                <!-- เนื้อหาโฆษณาจะแสดงผ่าน JavaScript (AdSense หรือ สปอนเซอร์ตรง) -->
+            </div>
+        </div>
+    </section>
+
+    <!-- คอนเทนต์หลัก: แผงแอดมิน (จะถูกแสดงเมื่อแอดมินเข้าสู่ระบบแล้ว) -->
+    <section id="admin-panel" class="max-w-7xl mx-auto px-4 mt-8 hidden transition duration-300">
+        <div class="bg-slate-950 border-2 border-red-500/40 rounded-2xl p-6 shadow-2xl relative">
+            <div class="absolute top-4 right-4 flex items-center gap-2">
+                <span class="text-[10px] bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-1 rounded-full font-bold">Admin Mode</span>
+                <button onclick="logoutAdmin()" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1.5 rounded-lg transition font-semibold">ออกจากระบบแอดมิน</button>
+            </div>
+            
+            <div class="flex items-center gap-2.5 mb-6 pb-4 border-b border-gray-800">
+                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <h2 class="text-2xl font-bold text-red-500">ระบบหลังบ้านแอดมินผู้ดูแลระบบ</h2>
+            </div>
+
+            <!-- สถิติแอดมินระดับลึก -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+                    <span class="text-xs text-gray-400 block">รายได้สะสม VIP (จำลอง)</span>
+                    <span id="admin-stat-revenue" class="text-2xl font-bold text-emerald-400">0</span> <span class="text-xs text-emerald-400">บาท</span>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+                    <span class="text-xs text-gray-400 block">รอการอนุมัติ VIP</span>
+                    <span id="admin-stat-pending" class="text-2xl font-bold text-amber-500">0</span> <span class="text-xs text-amber-500">องค์</span>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+                    <span class="text-xs text-gray-400 block">ประกาศ VIP ทั้งหมด</span>
+                    <span id="admin-stat-vip-total" class="text-2xl font-bold text-amulet-gold">0</span> <span class="text-xs text-amulet-gold">องค์</span>
+                </div>
+                <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+                    <span class="text-xs text-gray-400 block">ประกาศฟรีทั่วไป</span>
+                    <span id="admin-stat-free" class="text-2xl font-bold text-blue-400">0</span> <span class="text-xs text-blue-400">องค์</span>
+                </div>
+            </div>
+
+            <!-- แผงการจัดการโฆษณา (Ad / Sponsor Management) สำหรับแอดมิน -->
+            <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 mb-8">
+                <h3 class="text-md font-bold text-amulet-gold mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-amulet-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                    ระบบตั้งค่าการโฆษณา (Google AdSense / แบนเนอร์สปอนเซอร์)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold mb-2 text-gray-300">ประเภทโฆษณาที่ต้องการแสดง</label>
+                        <select id="admin-ad-type" onchange="toggleAdminAdType()" class="w-full bg-slate-950 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-300 outline-none focus:border-amulet-gold">
+                            <option value="sponsor">แบนเนอร์สปอนเซอร์ตรง (ขายพื้นที่เอง)</option>
+                            <option value="adsense">Google AdSense (แบบโค้ดสคริปต์)</option>
+                        </select>
+                    </div>
+                    <div id="admin-sponsor-inputs-1" class="md:col-span-1">
+                        <label class="block text-xs font-semibold mb-2 text-gray-300">ลิงก์รูปภาพสปอนเซอร์ (728x90 หรือใกล้เคียง)</label>
+                        <input type="text" id="admin-ad-img" placeholder="URL รูปภาพสปอนเซอร์" class="w-full bg-slate-950 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-300 outline-none focus:border-amulet-gold">
+                    </div>
+                    <div id="admin-sponsor-inputs-2" class="md:col-span-1">
+                        <label class="block text-xs font-semibold mb-2 text-gray-300">ลิงก์ไปยังเว็บไซต์ปลายทาง</label>
+                        <input type="text" id="admin-ad-link" placeholder="https://..." class="w-full bg-slate-950 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-300 outline-none focus:border-amulet-gold">
+                    </div>
+                    <div id="admin-adsense-inputs" class="md:col-span-2 hidden">
+                        <label class="block text-xs font-semibold mb-2 text-gray-300">โค้ดสคริปต์ Google AdSense (Code Script)</label>
+                        <textarea id="admin-ad-script" rows="2" placeholder="<ins class='adsbygoogle' ...></ins>" class="w-full bg-slate-950 border border-gray-700 rounded-lg px-3 py-2 text-xs text-gray-400 outline-none focus:border-amulet-gold font-mono"></textarea>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-end">
+                    <button onclick="saveAdSettings()" class="bg-gradient-to-r from-amulet-gold to-yellow-600 text-amulet-dark font-bold px-5 py-2 rounded-lg text-xs hover:from-yellow-600 hover:to-amulet-gold transition shadow">
+                        บันทึกการตั้งค่าโฆษณา
+                    </button>
+                </div>
+            </div>
+
+            <!-- ตารางตรวจสอบพระเครื่องและจัดการโพสต์ -->
+            <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                <div class="p-4 bg-gray-900 border-b border-gray-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <h3 class="text-sm font-bold text-gray-200">รายการประกาศทั้งหมดในฐานข้อมูล</h3>
+                    <div class="flex items-center gap-2">
+                        <button onclick="resetToDemoData()" class="bg-yellow-950/40 hover:bg-yellow-950/60 text-amulet-gold border border-amulet-gold/30 text-xs px-3 py-1.5 rounded-lg transition font-semibold">
+                            รีเซ็ตเป็นข้อมูลตัวอย่างเริ่มต้น
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-gray-300">
+                        <thead class="bg-gray-950 text-gray-400 uppercase font-semibold border-b border-gray-800">
+                            <tr>
+                                <th class="p-4">รูปภาพ</th>
+                                <th class="p-4">ชื่อพระเครื่อง / หมวดหมู่</th>
+                                <th class="p-4">ประเภทโพสต์</th>
+                                <th class="p-4">ผู้ขาย / ติดต่อ</th>
+                                <th class="p-4">สถานะ</th>
+                                <th class="p-4 text-center">สลิป/พรีวิว</th>
+                                <th class="p-4 text-center">การจัดการแอดมิน</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-amulet-list" class="divide-y divide-gray-800/80">
+                            <!-- รายการจัดการหลังบ้านจะเข้ามาแสดงผลผ่าน JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="admin-no-data" class="hidden text-center py-10 text-gray-500">
+                    ไม่มีประกาศในฐานข้อมูลขณะนี้
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- คอนเทนต์หลักแบ่งโซน -->
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- ฝั่งซ้าย: ฟอร์มลงทะเบียนประกาศขาย (Lg: col-span-5) -->
+        <section id="form-section" class="lg:col-span-5">
+            <div class="bg-amulet-panel border border-amulet-gold/20 p-6 rounded-2xl shadow-xl sticky top-24">
+                <div class="flex items-center gap-2 mb-4 pb-3 border-b border-amulet-gold/10">
+                    <svg class="w-6 h-6 text-amulet-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    <h2 class="text-xl font-bold text-amulet-gold">ลงประกาศขายพระเครื่อง</h2>
+                </div>
+
+                <form id="amuletForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <!-- ประเภทประกาศ -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-300">รูปแบบประกาศ <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="cursor-pointer border border-gray-600 rounded-lg p-3 flex items-center justify-center gap-2 bg-amulet-dark/50 hover:bg-amulet-dark transition" id="label-free">
+                                <input type="radio" name="postType" value="free" checked onchange="togglePostType('free')" class="accent-amulet-gold">
+                                <span class="text-sm text-gray-300">ลงประกาศฟรี</span>
+                            </label>
+                            <label class="cursor-pointer border border-amulet-gold/30 rounded-lg p-3 flex items-center justify-center gap-2 bg-yellow-950/20 hover:bg-yellow-950/40 transition" id="label-vip">
+                                <input type="radio" name="postType" value="vip" onchange="togglePostType('vip')" class="accent-amulet-gold">
+                                <span class="text-sm text-amulet-gold font-bold">ประกาศ VIP ✨</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- ชื่อพระเครื่อง -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-300" for="amuletName">ชื่อพระเครื่อง/หัวข้อประกาศ <span class="text-red-500">*</span></label>
+                        <input type="text" id="amuletName" required placeholder="เช่น หลวงปู่ทวด วัดช้างให้ ปี 05 พิมพ์เตารีด" class="w-full bg-amulet-dark border border-gray-700 focus:border-amulet-gold rounded-lg px-3 py-2 text-sm outline-none transition">
+                    </div>
+
+                    <!-- หมวดหมู่ -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-300" for="category">หมวดหมู่พระเครื่อง <span class="text-red-500">*</span></label>
+                        <select id="category" required class="w-full bg-amulet-dark border border-gray-700 focus:border-amulet-gold rounded-lg px-3 py-2 text-sm outline-none transition">
+                            <option value="">-- เลือกหมวดหมู่ --</option>
+                            <option value="พระสมเด็จและพระเนื้อผง">พระสมเด็จและพระเนื้อผง</option>
+                            <option value="พระเบญจภาคี">พระเบญจภาคี</option>
+                            <option value="พระเหรียญคณาจารย์">พระเหรียญคณาจารย์</option>
+                            <option value="พระกริ่งและพระรูปหล่อ">พระกริ่งและพระรูปหล่อ</option>
+                            <option value="พระเนื้อดิน-เนื้อชิน">พระเนื้อดิน-เนื้อชิน</option>
+                            <option value="พระปิดตา">พระปิดตา</option>
+                            <option value="เครื่องรางของขลัง">เครื่องรางของขลัง</option>
+                            <option value="พระบูชา">พระบูชา</option>
+                        </select>
+                    </div>
+
+                    <!-- ยืนยันข้อมูลพระแท้ / มีบัตรรับรอง -->
+                    <div class="bg-amulet-dark/50 p-3 rounded-lg border border-gray-800">
+                        <label class="flex items-center gap-2 cursor-pointer select-none">
+                            <input type="checkbox" id="hasCertificate" class="rounded border-gray-700 accent-amulet-gold w-4 h-4">
+                            <span class="text-xs font-semibold text-gray-300 flex items-center gap-1">
+                                🎖️ พระเครื่องนี้มี "บัตรรับรองพระแท้" (Certificate)
+                            </span>
+                        </label>
+                        <p class="text-[10px] text-gray-500 mt-1 pl-6">กรุณาเตรียมบัตรแสดงให้ผู้ซื้อตรวจสอบเมื่อมีการร้องขอ</p>
+                    </div>
+
+                    <!-- ราคา -->
+                    <div class="grid grid-cols-12 gap-2">
+                        <div class="col-span-8">
+                            <label class="block text-sm font-semibold mb-1 text-gray-300" for="price">ราคา (บาท)</label>
+                            <input type="number" id="price" placeholder="ระบุตัวเลขราคา เช่น 5500" class="w-full bg-amulet-dark border border-gray-700 focus:border-amulet-gold rounded-lg px-3 py-2 text-sm outline-none transition">
+                        </div>
+                        <div class="col-span-4 flex items-end pb-2">
+                            <label class="flex items-center gap-1 cursor-pointer text-xs text-gray-400 select-none">
+                                <input type="checkbox" id="contactForPrice" onchange="handlePriceCheckbox()" class="rounded bg-amulet-dark border-gray-700 accent-amulet-gold w-4 h-4">
+                                สอบถามราคา
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- รายละเอียดพระเครื่อง -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-300" for="details">รายละเอียด / การรับประกัน / ตำหนิ <span class="text-red-500">*</span></label>
+                        <textarea id="details" rows="3" required placeholder="รายละเอียดเพิ่มเติม เช่น พระแท้รับประกันตลอดชีพ สภาพสวยเดิมจากวัด..." class="w-full bg-amulet-dark border border-gray-700 focus:border-amulet-gold rounded-lg px-3 py-2 text-sm outline-none transition"></textarea>
+                    </div>
+
+                    <!-- รูปภาพพระเครื่อง -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-300">รูปภาพพระเครื่อง (รับไฟล์ภาพ .jpg, .png)</label>
+                        <div class="relative border-2 border-dashed border-gray-700 hover:border-amulet-gold/50 rounded-lg p-4 text-center cursor-pointer transition" onclick="document.getElementById('imageFile').click()">
+                            <input type="file" id="imageFile" accept="image/*" class="hidden" onchange="previewImage(this)">
+                            <div class="space-y-1" id="upload-placeholder">
+                                <svg class="mx-auto h-10 w-10 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <p class="text-xs text-gray-400">คลิกเพื่อเลือกไฟล์รูปภาพพระเครื่อง</p>
+                            </div>
+                            <div id="image-preview-container" class="hidden relative inline-block mx-auto">
+                                <img id="image-preview" src="#" alt="Amulet Preview" class="max-h-36 rounded-lg shadow-md">
+                                <button type="button" onclick="removeImage(event)" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700 shadow transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ข้อมูลผู้ติดต่อ -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1 text-gray-300" for="sellerName">ชื่อผู้ขาย <span class="text-red-500">*</span></label>
+                            <input type="text" id="sellerName" required placeholder="คุณพระคุ้มครอง" class="w-full bg-amulet-dark border border-gray-700 focus:border-amulet-gold rounded-lg px-3 py-2 text-sm outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1 text-gray-300" for="contact">เบอร์โทร / Line ID <span class="text-red-500">*</span></label>
+                            <input type="text" id="contact" required placeholder="08x-xxxxxxx หรือ ID Line" class="w-full bg-amulet-dark border border-gray-700 focus:border-amulet-gold rounded-lg px-3 py-2 text-sm outline-none transition">
+                        </div>
+                    </div>
+
+                    <!-- แผงชำระเงิน VIP (ซ่อนอยู่ จะโชว์เมื่อคลิก VIP) -->
+                    <div id="vip-payment-panel" class="hidden bg-yellow-950/20 border border-amulet-gold/30 p-4 rounded-xl space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 bg-amulet-gold rounded-full animate-ping"></span>
+                            <h3 class="text-sm font-bold text-amulet-gold">ขั้นตอนลงทะเบียน VIP (ค่าบริการ 50 บ.)</h3>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            สิทธิพิเศษ: ประกาศเด่นขึ้นอันดับหนึ่งของวัน มีกรอบแสงทองพรีเมียม และได้รับเครื่องหมาย VIP สีทองสะดุดตา
+                        </p>
+                        <div class="bg-white p-3 rounded-lg text-center max-w-[160px] mx-auto shadow-md">
+                            <p class="text-[10px] text-gray-600 font-bold mb-1">สแกนชำระเงินค่าโฆษณา</p>
+                            <!-- รูปคิวอาร์โค้ดจำลองการโอนเงิน (ใช้ SVG เสมือนจริงเพื่อความน่าเชื่อถือ) -->
+                            <div class="w-28 h-28 mx-auto bg-gray-200 flex items-center justify-center rounded">
+                                <svg class="w-24 h-24 text-gray-800" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h3v3h-3v-3zm-2 2h2v2h-2v-2zm2 2h3v3h-3v-3zm-4 2h2v2h-2v-2zm2-4h2v2h-2v-2zm-4-4h2v2h-2V9zm2 2h2v2h-2v-2zm-4-2h2v2h-2V7zm-2 4h2v2H9v-2zm4 4h2v2h-2v-2z"/>
+                                </svg>
+                            </div>
+                            <p class="text-xs text-red-600 font-bold mt-1">ยอดโอน: 50.- บาท</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1 text-gray-300">อัปโหลดรูปภาพสลิปโอนเงิน <span class="text-red-500">*</span></label>
+                            <input type="file" id="slipFile" accept="image/*" onchange="previewSlip(this)" class="w-full text-xs text-gray-400 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-amulet-gold file:text-amulet-dark hover:file:bg-amber-400 cursor-pointer">
+                            <div id="slip-preview-container" class="hidden mt-2 text-center">
+                                <p class="text-[10px] text-gray-400 mb-1">พรีวิวสลิปที่อัปโหลด:</p>
+                                <img id="slip-preview" src="#" alt="Slip Preview" class="max-h-24 mx-auto rounded shadow">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ปุ่มส่งฟอร์ม -->
+                    <button type="submit" class="w-full bg-gradient-to-r from-amulet-gold to-yellow-600 hover:from-yellow-600 hover:to-amulet-gold text-amulet-dark font-bold py-2.5 rounded-lg transition duration-300 shadow-md">
+                        ยืนยันการลงประกาศสินค้า
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ฝั่งขวา: ค้นหา ตัวกรอง และรายการพระเครื่องทั้งหมด (Lg: col-span-7) -->
+        <section class="lg:col-span-7 space-y-6">
+            
+            <!-- แผงค้นหาและตัวกรอง -->
+            <div class="bg-amulet-panel border border-amulet-gold/10 p-4 rounded-xl space-y-3 shadow-md">
+                <div class="flex flex-col md:flex-row gap-2">
+                    <div class="relative flex-1">
+                        <input type="text" id="searchBar" oninput="filterAmulets()" placeholder="ค้นหาชื่อพระเครื่อง หรือผู้ตั้งขาย..." class="w-full bg-amulet-dark border border-gray-700 focus:border-amulet-gold rounded-lg pl-10 pr-4 py-2 text-sm outline-none transition">
+                        <svg class="w-5 h-5 text-gray-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <div class="md:w-48">
+                        <select id="categoryFilter" onchange="filterAmulets()" class="w-full bg-amulet-dark border border-gray-700 focus:border-amulet-gold rounded-lg px-3 py-2 text-sm outline-none transition">
+                            <option value="ALL">ทุกหมวดหมู่</option>
+                            <option value="พระสมเด็จและพระเนื้อผง">พระสมเด็จและพระเนื้อผง</option>
+                            <option value="พระเบญจภาคี">พระเบญจภาคี</option>
+                            <option value="พระเหรียญคณาจารย์">พระเหรียญคณาจารย์</option>
+                            <option value="พระกริ่งและพระรูปหล่อ">พระกริ่งและพระรูปหล่อ</option>
+                            <option value="พระเนื้อดิน-เนื้อชิน">พระเนื้อดิน-เนื้อชิน</option>
+                            <option value="พระปิดตา">พระปิดตา</option>
+                            <option value="เครื่องรางของขลัง">เครื่องรางของขลัง</option>
+                            <option value="พระบูชา">พระบูชา</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pt-1 flex items-center justify-between">
+                    <label class="flex items-center gap-1.5 cursor-pointer text-xs text-gray-300">
+                        <input type="checkbox" id="certFilter" onchange="filterAmulets()" class="rounded bg-amulet-dark border-gray-700 accent-amulet-gold w-4 h-4">
+                        🎖️ แสดงเฉพาะพระเครื่องที่มี "บัตรรับรองพระแท้"
+                    </label>
+                </div>
+            </div>
+
+            <!-- โซนที่ 1: พระเครื่องแนะนำพรีเมียม (VIP Showcase) -->
+            <div>
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="flex h-2.5 w-2.5 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amulet-gold opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amulet-gold"></span>
+                    </span>
+                    <h3 class="text-md font-bold text-amulet-gold">รายการแนะนำพิเศษ (VIP Premium)</h3>
+                </div>
+                <!-- รายการ VIP จะโชว์เป็นตารางสีทอง -->
+                <div id="vip-amulets-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- รายการจะเข้ามาแทนที่ตรงนี้จาก JS -->
+                </div>
+                <div id="no-vip-message" class="hidden text-center py-6 bg-amulet-dark/40 border border-dashed border-gray-800 rounded-lg text-xs text-gray-500">
+                    ยังไม่มีรายการ VIP แนะนำในขณะนี้
+                </div>
+            </div>
+
+            <!-- โซนที่ 2: รายการพระเครื่องทั่วไป (Free Listings) -->
+            <div class="border-t border-amulet-gold/10 pt-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-md font-bold text-gray-300">รายการพระเครื่องทั้งหมด</h3>
+                    <span id="general-count" class="text-xs text-gray-400 bg-amulet-panel px-2.5 py-1 rounded-full border border-gray-800">0 รายการ</span>
+                </div>
+                <div id="general-amulets-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                    <!-- รายการพระเครื่องจะเข้ามาแสดงผลที่นี่ -->
+                </div>
+                <div id="no-amulet-message" class="hidden text-center py-16 bg-amulet-panel rounded-2xl border border-dashed border-gray-800 text-gray-400">
+                    <svg class="mx-auto h-12 w-12 text-gray-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    ไม่พบรายการพระเครื่องที่ท่านกำลังค้นหา
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- หน้าต่างโมดอล: เข้าสู่ระบบแอดมิน -->
+    <div id="adminLoginModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-red-500/30 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button onclick="closeAdminLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="text-center space-y-3">
+                <div class="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center mx-auto text-red-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-gray-100">เข้าสู่ระบบหลังบ้าน (Admin)</h3>
+                <p class="text-xs text-gray-400">กรุณากรอกรหัสผ่านเพื่อสลับหน้าเว็บเข้าสู่ระบบแอดมิน</p>
+                <div class="text-[11px] bg-red-500/10 text-red-400 p-2 rounded-lg border border-red-500/20">
+                    รหัสผ่านสำหรับทดสอบระบบ: <span class="font-bold underline">admin123</span>
+                </div>
+                <div class="space-y-3 pt-2">
+                    <input type="password" id="adminPassword" placeholder="ระบุรหัสผ่านแอดมิน" class="w-full bg-slate-950 border border-gray-700 focus:border-red-500 rounded-lg px-3 py-2 text-sm text-center outline-none transition">
+                    <button onclick="attemptAdminLogin()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg transition text-sm">
+                        ยืนยันรหัสผ่าน
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าต่างโมดอล: แสดงภาพสลิปโอนเงิน (Slip Modal) -->
+    <div id="slipModal" class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-amulet-panel border border-amulet-gold/30 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative text-center">
+            <button onclick="closeSlipModal()" class="absolute top-4 right-4 bg-amulet-dark text-gray-400 hover:text-white rounded-full p-1.5 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h4 class="text-md font-bold text-amulet-gold mb-4">สลิปหลักฐานการโอนเงิน</h4>
+            <div class="bg-black/40 rounded-xl p-2 border border-gray-800">
+                <img id="slipModalImage" src="#" alt="Transfer Slip" class="max-h-[420px] mx-auto object-contain rounded">
+            </div>
+            <p class="text-xs text-gray-400 mt-3">ตรวจสอบสลิป ความถูกต้อง วันที่ และยอดเงินโอน 50 บาท</p>
+        </div>
+    </div>
+
+    <!-- หน้าต่างโมดอล: แสดงรายละเอียดข้อมูลพระเครื่องแบบเจาะลึก (Detail Modal) -->
+    <div id="detailModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-amulet-panel border border-amulet-gold/30 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 bg-amulet-dark text-gray-400 hover:text-white rounded-full p-2 border border-gray-800 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div id="modalContent" class="p-6">
+                <!-- ข้อมูลภายในจะเข้ามาแสดงผลผ่าน JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ส่วนท้ายเว็บ (Footer) -->
+    <footer class="border-t border-amulet-gold/10 bg-amulet-dark py-8 mt-16 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="thai-title text-xl text-amulet-gold">สยามปฏิมา - ศูนย์รวมศรัทธาออนไลน์</p>
+            <p>© 2026 SiamPatima.com. สงวนลิขสิทธิ์ตามพระราชบัญญัติ</p>
+            <p class="text-gray-600 max-w-md mx-auto text-[10px]">
+                หมายเหตุ: เว็บไซต์นี้เป็นระบบจำลองแบบหน้าเดียว (Single Page Application) ที่มาพร้อมกับระบบแอดมินจำลองที่มีส่วนสกัดกั้นตรวจสอบความถูกต้อง และการบันทึกสถานะผ่าน localStorage
+            </p>
+        </div>
+    </footer>
+
+    <!-- ส่วน Script ควบคุมการทำงานทั้งหมด -->
+    <script>
+        // ข้อมูลตัวอย่างพระเครื่องจำลองเริ่มต้น (รวมข้อมูลประเภทและสถานะของแต่ละประกาศไว้)
+        const initialAmulets = [
+            {
+                id: "init_1",
+                name: "พระสมเด็จวัดระฆัง พิมพ์ใหญ่ ทรงมาตรฐาน",
+                category: "พระสมเด็จและพระเนื้อผง",
+                price: "สอบถามราคา",
+                details: "สภาพสวยแชมป์ เนื้อจัดจ้าน เกศทะลุซุ้ม คราบแป้งและรอยปูไต่ครบสูตร มวลสารชัดเจนผ่านการตรวจรับรองพระแท้ มีบัตรสมาคมพระเครื่องไทย",
+                sellerName: "เสี่ยวิทย์ ลานพระแท้",
+                contact: "089-123-4567 / Line: wet_amulet",
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%231f1a14'/><g fill='%23d4af37' opacity='0.8'><path d='M140,80h120v240H140V80z M150,90v220h100V90H150z'/><path d='M160,110h80v180h-80V110z M170,120v160h60V120H170z'/><ellipse cx='200' cy='170' rx='20' ry='30'/><path d='M180,210h40l10,30h-60z'/></g></svg>",
+                postType: "vip",
+                status: "approved", // อนุมัติแล้วจากแอดมิน
+                hasCert: true,
+                slipImage: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23e0f2fe'/><text x='50%' y='30%' font-size='16' fill='%230369a1' text-anchor='middle'>สลิปโอนเงินจำลอง 50.-</text><text x='50%' y='50%' font-size='12' fill='%23334155' text-anchor='middle'>ผู้โอน: เสี่ยวิทย์</text></svg>",
+                timestamp: new Date(Date.now() - 3600000).toLocaleString('th-TH')
+            },
+            {
+                id: "init_2",
+                name: "เหรียญหลวงปู่ทวด วัดช้างให้ รุ่นแรก ปี 2500 เนื้อทองแดงผิวไฟ",
+                category: "พระเหรียญคณาจารย์",
+                price: "45000",
+                details: "เหรียญสวย คมชัด ลึก ผิวไฟแดงๆ เดิมๆ ไม่มีล้าง ยันต์คมกริบ พร้อมกรอบทองคำแท้พรีเมียม 90% บูชาไปไม่มีผิดหวัง",
+                sellerName: "หนึ่ง ปากน้ำ",
+                contact: "081-999-8888",
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%231a1612'/><g fill='%23cd7f32' stroke='%23d4af37' stroke-width='2'><circle cx='200' cy='200' r='100'/><circle cx='200' cy='110' r='15'/><circle cx='200' cy='200' r='80' fill='none'/><path d='M180,180 L220,180 L200,150 Z'/><ellipse cx='200' cy='220' rx='25' ry='15'/></g></svg>",
+                postType: "vip",
+                status: "approved", // อนุมัติแล้วจากแอดมิน
+                hasCert: false,
+                slipImage: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23e0f2fe'/><text x='50%' y='30%' font-size='16' fill='%230369a1' text-anchor='middle'>สลิปโอนเงินจำลอง 50.-</text><text x='50%' y='50%' font-size='12' fill='%23334155' text-anchor='middle'>ผู้โอน: หนึ่ง ปากน้ำ</text></svg>",
+                timestamp: new Date(Date.now() - 7200000).toLocaleString('th-TH')
+            },
+            {
+                id: "init_3",
+                name: "พระกริ่งปวเรศ พิมพ์โบราณ เนื้อสัมฤทธิ์แก่ทอง",
+                category: "พระกริ่งและพระรูปหล่อ",
+                price: "12000",
+                details: "พระกริ่งมีเสียงกังวานชัดเจน เนื้อสัมฤทธิ์กลับดำ มีความเก่าธรรมชาติ เม็ดพระศกเด้งกลมมน เข้มขลังพุทธคุณ",
+                sellerName: "ครูบาใหญ่",
+                contact: "Line: kru_amulet",
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%23111'/><g fill='%23cd7f32' stroke='%238b5a2b' stroke-width='1.5'><path d='M160,260 C160,180 240,180 240,260 Z'/><ellipse cx='200' cy='140' rx='30' ry='40'/><circle cx='200' cy='85' r='12'/></g></svg>",
+                postType: "free",
+                status: "approved", // ประกาศฟรีผ่านโดยอัตโนมัติ
+                hasCert: true,
+                slipImage: "",
+                timestamp: new Date(Date.now() - 86400000).toLocaleString('th-TH')
+            },
+            {
+                id: "init_4",
+                name: "พระปิดตาหลวงปู่โต๊ะ วัดประดู่ฉิมพลี พิมพ์จัมโบ้ 2 (ตัวอย่างรออนุมัติ)",
+                category: "พระปิดตา",
+                price: "85000",
+                details: "ตัวอย่างจำลองพระเครื่องประเภท VIP ที่ถูกส่งเข้ามาระบบหลังบ้าน รอแอดมินกดอนุมัติเพื่อแสดงหน้าแรก",
+                sellerName: "เซียนเป็ด เมืองชล",
+                contact: "085-555-4444",
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%231f1105'/><circle cx='200' cy='160' r='50' fill='%23cd7f32'/><circle cx='200' cy='250' r='65' fill='%23cd7f32'/><rect x='170' y='180' width='60' height='15' fill='%23d4af37'/></svg>",
+                postType: "vip",
+                status: "pending", // รอตรวจสอบจากแอดมิน
+                hasCert: true,
+                slipImage: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23e2e8f0'/><rect x='10' y='10' width='280' height='380' rx='8' fill='white' stroke='%23cbd5e1' stroke-width='2'/><text x='50%' y='25%' font-size='16' font-weight='bold' fill='%231e293b' text-anchor='middle'>K-Bank Transfer Slip</text><text x='50%' y='40%' font-size='13' fill='%23059669' text-anchor='middle'>✓ โอนเงินสำเร็จ</text><text x='50%' y='55%' font-size='12' fill='%2364748b' text-anchor='middle'>ปลายทาง: บัญชีสยามปฏิมา</text><text x='50%' y='68%' font-size='18' font-weight='bold' fill='%231e293b' text-anchor='middle'>50.00 บาท</text><text x='50%' y='85%' font-size='10' fill='%2394a3b8' text-anchor='middle'>เลขอ้างอิง: 2026061589324021</text></svg>",
+                timestamp: new Date().toLocaleString('th-TH')
+            }
+        ];
+
+        // ข้อมูลเริ่มต้นสำหรับระบบโฆษณา
+        const defaultAds = {
+            type: "sponsor", // adsense OR sponsor
+            sponsorImg: "https://placehold.co/728x90/221c15/d4af37?text=Sponsor+Space+:+ร้านทองมีทอง+รับเลี่ยมพระเลี่ยมทองแท้+90%+คลิกเลย",
+            sponsorLink: "https://google.com",
+            adsenseScript: "<!-- Google AdSense Simulated --><div class='w-full py-6 bg-slate-900 border border-yellow-600/20 text-yellow-500 font-mono text-xs rounded-xl flex items-center justify-center gap-2'><span>[Google AdSense Slot - Simulated Advertising script code]</span></div>"
+        };
+
+        let amulets = [];
+        let adsState = {};
+        let uploadedImageBase64 = "";
+        let uploadedSlipBase64 = "";
+        let isAdminLoggedIn = false;
+
+        // ฟังก์ชันเริ่มโหลดเว็บ
+        window.onload = function() {
+            // โหลดข้อมูลจาก localStorage หรือใช้ข้อมูลจำลองเริ่มต้นหากไม่มีข้อมูล
+            const stored = localStorage.getItem('siam_patima_amulets');
+            if (stored) {
+                amulets = JSON.parse(stored);
+            } else {
+                amulets = initialAmulets;
+                saveToLocalStorage();
+            }
+
+            // โหลดสถานะระบบโฆษณา
+            const storedAds = localStorage.getItem('siam_patima_ads');
+            if (storedAds) {
+                adsState = JSON.parse(storedAds);
+            } else {
+                adsState = defaultAds;
+                localStorage.setItem('siam_patima_ads', JSON.stringify(adsState));
+            }
+
+            // ตรวจสอบสถานะล็อกอินแอดมินเดิมจาก sessionStorage เพื่อความสะดวกในการใช้
+            const loggedInStatus = sessionStorage.getItem('siam_patima_admin_logged');
+            if (loggedInStatus === 'true') {
+                isAdminLoggedIn = true;
+                showAdminPanel(true);
+            }
+
+            renderAmulets();
+            updateStats();
+            renderAds();
+        };
+
+        // เลื่อนหน้าจอลงไปที่ฟอร์มเมื่อกดปุ่ม
+        function scrollToForm() {
+            document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // เซฟข้อมูลลง localStorage
+        function saveToLocalStorage() {
+            localStorage.setItem('siam_patima_amulets', JSON.stringify(amulets));
+        }
+
+        // แสดงโฆษณาบนหน้าเว็บ
+        function renderAds() {
+            const container = document.getElementById('ad-content-wrapper');
+            if (!container) return;
+
+            if (adsState.type === 'adsense') {
+                container.innerHTML = adsState.adsenseScript;
+            } else {
+                container.innerHTML = `
+                    <a href="${adsState.sponsorLink}" target="_blank" class="block w-full transition transform hover:scale-[1.01] duration-300">
+                        <img src="${adsState.sponsorImg}" alt="Sponsor Banner" class="w-full h-auto max-h-[90px] rounded-lg object-cover mx-auto" onerror="this.src='https://placehold.co/728x90/221c15/d4af37?text=ติดต่อลงโฆษณาโทร+08x-xxxxxxx'">
+                    </a>
+                `;
+            }
+        }
+
+        // จัดการเมื่อแอดมินสลับประเภทโฆษณาบนหน้าฟอร์มหลังบ้าน
+        function toggleAdminAdType() {
+            const adType = document.getElementById('admin-ad-type').value;
+            const s1 = document.getElementById('admin-sponsor-inputs-1');
+            const s2 = document.getElementById('admin-sponsor-inputs-2');
+            const adsenseInput = document.getElementById('admin-adsense-inputs');
+
+            if (adType === 'adsense') {
+                s1.classList.add('hidden');
+                s2.classList.add('hidden');
+                adsenseInput.classList.remove('hidden');
+            } else {
+                s1.classList.remove('hidden');
+                s2.classList.remove('hidden');
+                adsenseInput.classList.add('hidden');
+            }
+        }
+
+        // แอดมินบันทึกการตั้งค่าระบบโฆษณา
+        function saveAdSettings() {
+            if (!isAdminLoggedIn) return;
+            
+            adsState.type = document.getElementById('admin-ad-type').value;
+            adsState.sponsorImg = document.getElementById('admin-ad-img').value;
+            adsState.sponsorLink = document.getElementById('admin-ad-link').value;
+            adsState.adsenseScript = document.getElementById('admin-ad-script').value;
+
+            localStorage.setItem('siam_patima_ads', JSON.stringify(adsState));
+            renderAds();
+            showCustomToast("บันทึกข้อมูลและอัปเดตระบบโฆษณาเรียบร้อยแล้ว", "success");
+        }
+
+        // ตัวเลือก "สอบถามราคา"
+        function handlePriceCheckbox() {
+            const checkbox = document.getElementById('contactForPrice');
+            const priceInput = document.getElementById('price');
+            if (checkbox.checked) {
+                priceInput.value = "";
+                priceInput.disabled = true;
+                priceInput.placeholder = "สอบถามราคา";
+            } else {
+                priceInput.disabled = false;
+                priceInput.placeholder = "ระบุตัวเลขราคา เช่น 5500";
+            }
+        }
+
+        // เปิด/ปิดแผงการชำระเงิน VIP
+        function togglePostType(type) {
+            const paymentPanel = document.getElementById('vip-payment-panel');
+            const labelFree = document.getElementById('label-free');
+            const labelVip = document.getElementById('label-vip');
+
+            if (type === 'vip') {
+                paymentPanel.classList.remove('hidden');
+                labelVip.classList.add('border-amulet-gold', 'bg-yellow-950/40');
+                labelFree.classList.remove('border-amulet-gold', 'bg-amulet-dark');
+                document.getElementById('slipFile').required = true;
+            } else {
+                paymentPanel.classList.add('hidden');
+                labelFree.classList.add('border-gray-600', 'bg-amulet-dark/50');
+                labelVip.classList.remove('border-amulet-gold', 'bg-yellow-950/40');
+                document.getElementById('slipFile').required = false;
+            }
+        }
+
+        // พรีวิวรูปพระเครื่องที่อัปโหลด
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('image-preview').src = e.target.result;
+                    document.getElementById('image-preview-container').classList.remove('hidden');
+                    document.getElementById('upload-placeholder').classList.add('hidden');
+                    uploadedImageBase64 = e.target.result; // เก็บ Base64 สำหรับจัดเก็บ
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // เอารูปที่พรีวิวออก
+        function removeImage(event) {
+            event.stopPropagation();
+            document.getElementById('imageFile').value = "";
+            document.getElementById('image-preview').src = "#";
+            document.getElementById('image-preview-container').classList.add('hidden');
+            document.getElementById('upload-placeholder').classList.remove('hidden');
+            uploadedImageBase64 = "";
+        }
+
+        // พรีวิวรูปสลิป
+        function previewSlip(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('slip-preview').src = e.target.result;
+                    document.getElementById('slip-preview-container').classList.remove('hidden');
+                    uploadedSlipBase64 = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // เอารูปสลิปออก
+        function removeSlip() {
+            document.getElementById('slipFile').value = "";
+            document.getElementById('slip-preview').src = "#";
+            document.getElementById('slip-preview-container').classList.add('hidden');
+            uploadedSlipBase64 = "";
+        }
+
+        // บันทึกฟอร์มลงรายการพระ
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('amuletName').value;
+            const category = document.getElementById('category').value;
+            const checkbox = document.getElementById('contactForPrice');
+            const priceVal = document.getElementById('price').value;
+            const price = checkbox.checked ? "สอบถามราคา" : priceVal;
+            const details = document.getElementById('details').value;
+            const sellerName = document.getElementById('sellerName').value;
+            const contact = document.getElementById('contact').value;
+            const postType = document.querySelector('input[name="postType"]:checked').value;
+            const hasCert = document.getElementById('hasCertificate').checked;
+
+            let status = "approved"; // ค่าเริ่มต้นสำหรับโพสต์ทั่วไปคือ อนุมัติทันที
+            let finalSlip = "";
+
+            // ตรวจสอบรูปหลักประกัน VIP
+            if (postType === 'vip') {
+                const slipFile = document.getElementById('slipFile');
+                if (slipFile.files.length === 0) {
+                    showCustomToast("กรุณาอัปโหลดหลักฐานสลิปการโอนเงินเพื่อทำรายการ VIP", "error");
+                    return;
+                }
+                status = "pending"; // บังคับรอแอดมินอนุมัติก่อนเท่านั้นสำหรับ VIP
+                finalSlip = uploadedSlipBase64;
+            }
+
+            // จัดหาภาพเริ่มต้นหากไม่มีการอัปโหลด
+            const finalImage = uploadedImageBase64 || "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='100%' height='100%' fill='%231a1612'/><text x='50%' y='50%' font-size='16' fill='%23666' text-anchor='middle'>ไม่มีรูปภาพพระเครื่อง</text></svg>";
+
+            const newAmulet = {
+                id: "user_" + Date.now(),
+                name: name,
+                category: category,
+                price: price,
+                details: details,
+                sellerName: sellerName,
+                contact: contact,
+                image: finalImage,
+                postType: postType,
+                status: status,
+                hasCert: hasCert,
+                slipImage: finalSlip,
+                timestamp: new Date().toLocaleString('th-TH')
+            };
+
+            // เพิ่มเข้าสู่หัวตาราง
+            amulets.unshift(newAmulet);
+            saveToLocalStorage();
+
+            // แจ้งเตือนเสร็จสิ้น
+            if (postType === 'vip') {
+                showCustomToast("ส่งข้อมูล VIP เรียบร้อยแล้ว! รอดำเนินการตรวจสอบสลิปภายใน 5 นาที", "success");
+            } else {
+                showCustomToast("ลงประกาศพระเครื่องฟรีสำเร็จ!", "success");
+            }
+
+            // รีเซ็ตฟอร์ม
+            document.getElementById('amuletForm').reset();
+            removeImage(event);
+            removeSlip();
+            document.getElementById('contactForPrice').checked = false;
+            document.getElementById('price').disabled = false;
+            document.getElementById('hasCertificate').checked = false;
+            togglePostType('free');
+
+            // อัปเดตหน้าเว็บ
+            renderAmulets();
+            updateStats();
+        }
+
+        // จัดการแสดงผลพระเครื่องทั้งหมดบนหน้าเว็บ (จะกรองเฉพาะสถานะ "approved" ขึ้นหน้าเว็บสาธารณะ)
+        function renderAmulets(filterCategory = "ALL", searchQuery = "") {
+            const vipGrid = document.getElementById('vip-amulets-grid');
+            const generalGrid = document.getElementById('general-amulets-grid');
+            const noVipMessage = document.getElementById('no-vip-message');
+            const noAmuletMessage = document.getElementById('no-amulet-message');
+            const onlyCertFilter = document.getElementById('certFilter').checked;
+
+            vipGrid.innerHTML = "";
+            generalGrid.innerHTML = "";
+
+            let vipCount = 0;
+            let generalCount = 0;
+
+            const query = searchQuery.trim().toLowerCase();
+
+            amulets.forEach(amulet => {
+                // คัดกรองเฉพาะพระเครื่องที่ได้รับการอนุมัติแล้ว (approved) เท่านั้นสำหรับหน้าปกติ
+                if (amulet.status !== "approved") return;
+
+                // กรองพระมีบัตรรับรอง
+                if (onlyCertFilter && !amulet.hasCert) return;
+
+                const matchCategory = filterCategory === "ALL" || amulet.category === filterCategory;
+                const matchSearch = amulet.name.toLowerCase().includes(query) || 
+                                    amulet.sellerName.toLowerCase().includes(query) ||
+                                    amulet.details.toLowerCase().includes(query);
+
+                if (matchCategory && matchSearch) {
+                    if (amulet.postType === "vip") {
+                        vipGrid.innerHTML += createAmuletCard(amulet);
+                        vipCount++;
+                    } else {
+                        generalGrid.innerHTML += createAmuletCard(amulet);
+                        generalCount++;
+                    }
+                }
+            });
+
+            // คุมการแสดงข้อมูลสถิติ
+            document.getElementById('general-count').innerText = `${generalCount} รายการ`;
+
+            // ตรวจสอบเงื่อนไขการแจ้งข้อมูลว่างเปล่า
+            if (vipCount === 0) {
+                noVipMessage.classList.remove('hidden');
+            } else {
+                noVipMessage.classList.add('hidden');
+            }
+
+            if (generalCount === 0) {
+                noAmuletMessage.classList.remove('hidden');
+            } else {
+                noAmuletMessage.classList.add('hidden');
+            }
+
+            // อัปเดตหน้าแสดงผลแอดมิน (ถ้าล็อกอินอยู่)
+            if (isAdminLoggedIn) {
+                renderAdminAmuletList();
+            }
+        }
+
+        // ตัวสร้าง HTML Card พระเครื่องแต่ละองค์ พร้อมตราแสดงบัตรรับรองพระแท้
+        function createAmuletCard(amulet) {
+            const isVip = amulet.postType === 'vip';
+            const cardClass = isVip 
+                ? 'vip-glow relative flex flex-col rounded-xl overflow-hidden hover:scale-[1.02] transition duration-300 border-2 cursor-pointer' 
+                : 'bg-amulet-panel border border-gray-800 flex flex-col rounded-xl overflow-hidden hover:scale-[1.02] transition duration-300 cursor-pointer';
+            
+            // การแสดงผลราคา
+            const priceDisplay = amulet.price === "สอบถามราคา" 
+                ? `<span class="text-amulet-gold font-bold text-sm">สอบถามราคา</span>`
+                : `<span class="text-green-400 font-bold text-lg">${Number(amulet.price).toLocaleString()} <span class="text-xs font-normal text-gray-400">บาท</span></span>`;
+
+            // ตราสัญลักษณ์เมื่อมีบัตรรับรองพระแท้
+            const certBadge = amulet.hasCert 
+                ? `<span class="bg-emerald-950 text-emerald-400 border border-emerald-500/20 text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5" title="พระแท้ มีบัตรรับรอง">
+                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    มีบัตรรับรอง
+                   </span>` 
+                : '';
+
+            return `
+                <div class="${cardClass}" onclick="openDetailModal('${amulet.id}')">
+                    ${isVip ? `
+                        <div class="absolute top-2 left-2 z-10 vip-badge text-amulet-dark text-[10px] font-extrabold px-2 py-0.5 rounded shadow-sm flex items-center gap-1">
+                            <span>✨ VIP พรีเมียม</span>
+                        </div>
+                    ` : ''}
+                    <div class="h-56 w-full bg-black/60 flex items-center justify-center overflow-hidden">
+                        <img src="${amulet.image}" alt="${amulet.name}" class="h-full w-full object-cover">
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex items-center justify-between gap-1 mb-1.5 flex-wrap">
+                                <span class="text-[10px] bg-amulet-dark text-amulet-gold border border-amulet-gold/20 px-2 py-0.5 rounded-full inline-block">${amulet.category}</span>
+                                ${certBadge}
+                            </div>
+                            <h4 class="font-bold text-gray-200 text-sm line-clamp-1 hover:text-amulet-gold transition">${amulet.name}</h4>
+                            <p class="text-xs text-gray-400 line-clamp-2 mt-1 leading-relaxed">${amulet.details}</p>
+                        </div>
+                        <div class="border-t border-gray-800/80 pt-2.5 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-[9px] text-gray-500">ราคาบูชา</span>
+                                ${priceDisplay}
+                            </div>
+                            <div class="text-right flex flex-col">
+                                <span class="text-[9px] text-gray-500">ผู้ตั้งขาย</span>
+                                <span class="text-xs text-amber-100 font-semibold truncate max-w-[110px]">${amulet.sellerName}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ค้นหาและคัดกรองแบบเรียลไทม์
+        function filterAmulets() {
+            const category = document.getElementById('categoryFilter').value;
+            const search = document.getElementById('searchBar').value;
+            renderAmulets(category, search);
+        }
+
+        // อัปเดตตัวเลขแสดงผลแดชบอร์ดด้านบนสาธารณะ
+        function updateStats() {
+            const approvedAmulets = amulets.filter(a => a.status === 'approved');
+            const total = approvedAmulets.length;
+            const vips = approvedAmulets.filter(a => a.postType === 'vip').length;
+            
+            document.getElementById('stat-total').innerText = total;
+            document.getElementById('stat-vip').innerText = vips;
+
+            if (isAdminLoggedIn) {
+                updateAdminDashboardStats();
+            }
+        }
+
+        // ==========================================
+        //  หมวดฟังก์ชันแอดมิน (ADMIN MANAGEMENT FUNCTIONS)
+        // ==========================================
+
+        // เปิดโมดอลล็อกอินแอดมิน
+        function openAdminLoginModal() {
+            if (isAdminLoggedIn) {
+                // หากเข้าระบบอยู่แล้ว ให้เลื่อนจอไปที่บอร์ดหลังบ้าน หรือแจ้งผู้ใช้งาน
+                document.getElementById('admin-panel').scrollIntoView({ behavior: 'smooth' });
+                showCustomToast("คุณอยู่ในโหมดผู้ดูแลระบบอยู่แล้ว", "success");
+            } else {
+                document.getElementById('adminPassword').value = "";
+                document.getElementById('adminLoginModal').classList.remove('hidden');
+            }
+        }
+
+        // ปิดโมดอลล็อกอินแอดมิน
+        function closeAdminLoginModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        // ทดสอบล็อกอินแอดมิน
+        function attemptAdminLogin() {
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === "admin123") {
+                isAdminLoggedIn = true;
+                sessionStorage.setItem('siam_patima_admin_logged', 'true');
+                closeAdminLoginModal();
+                showAdminPanel(true);
+                showCustomToast("เข้าสู่ระบบผู้ดูแลระบบสำเร็จ", "success");
+                renderAdminAmuletList();
+                updateAdminDashboardStats();
+                
+                // โหลดค่าโฆษณาในฟอร์มหลังบ้าน
+                document.getElementById('admin-ad-type').value = adsState.type;
+                document.getElementById('admin-ad-img').value = adsState.sponsorImg;
+                document.getElementById('admin-ad-link').value = adsState.sponsorLink;
+                document.getElementById('admin-ad-script').value = adsState.adsenseScript;
+                toggleAdminAdType();
+
+                // เลื่อนหน้าจอไปที่ส่วนแอดมิน
+                setTimeout(() => {
+                    document.getElementById('admin-panel').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            } else {
+                showCustomToast("รหัสผ่านไม่ถูกต้อง กรุณาทดสอบด้วย: admin123", "error");
+            }
+        }
+
+        // ออกจากระบบแอดมิน
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            sessionStorage.removeItem('siam_patima_admin_logged');
+            showAdminPanel(false);
+            showCustomToast("ออกจากระบบผู้ดูแลระบบเรียบร้อย", "success");
+        }
+
+        // สลับแสดงแผงหลังบ้านแอดมิน
+        function showAdminPanel(show) {
+            const panel = document.getElementById('admin-panel');
+            const toggleBtn = document.getElementById('admin-toggle-btn');
+            
+            if (show) {
+                panel.classList.remove('hidden');
+                toggleBtn.innerHTML = `
+                    <svg class="w-4 h-4 text-red-500 fill-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <span class="text-red-400 font-bold">โหมดแอดมินใช้งานอยู่</span>
+                `;
+            } else {
+                panel.classList.add('hidden');
+                toggleBtn.innerHTML = `
+                    <svg class="w-4 h-4 text-amulet-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <span>ระบบแอดมิน</span>
+                `;
+            }
+        }
+
+        // คำนวณอัปเดตค่าสถิติในหน้าแอดมินหลังบ้าน
+        function updateAdminDashboardStats() {
+            const totalAmulets = amulets.length;
+            const vipTotal = amulets.filter(a => a.postType === 'vip').length;
+            const vipPending = amulets.filter(a => a.postType === 'vip' && a.status === 'pending').length;
+            const vipApproved = amulets.filter(a => a.postType === 'vip' && a.status === 'approved').length;
+            const freeTotal = amulets.filter(a => a.postType === 'free').length;
+            
+            // คำนวณรายได้สะสมจำลอง คิด 50 บาทจากจำนวน VIP ที่ได้รับการอนุมัติสำเร็จแล้ว
+            const mockRevenue = (vipApproved * 50);
+
+            document.getElementById('admin-stat-revenue').innerText = mockRevenue.toLocaleString();
+            document.getElementById('admin-stat-pending').innerText = vipPending;
+            document.getElementById('admin-stat-vip-total').innerText = vipTotal;
+            document.getElementById('admin-stat-free').innerText = freeTotal;
+        }
+
+        // อนุมัติประกาศแบบ VIP
+        function approveVIP(id) {
+            const amuletIndex = amulets.findIndex(a => a.id === id);
+            if (amuletIndex !== -1) {
+                amulets[amuletIndex].status = "approved";
+                saveToLocalStorage();
+                renderAmulets();
+                updateStats();
+                showCustomToast("อนุมัติประกาศ VIP เรียบร้อยแล้ว!", "success");
+            }
+        }
+
+        // ลบประกาศ (ประกาศทั่วไป และ VIP)
+        function deletePostByAdmin(id) {
+            const target = amulets.find(a => a.id === id);
+            if (!target) return;
+
+            const isConfirm = confirm(`คุณแน่ใจหรือไม่ที่จะลบประกาศ "${target.name}"?`);
+            if (isConfirm) {
+                amulets = amulets.filter(a => a.id !== id);
+                saveToLocalStorage();
+                renderAmulets();
+                updateStats();
+                showCustomToast("ลบประกาศพระเครื่องสำเร็จแล้ว", "success");
+            }
+        }
+
+        // สลับประเภทโพสต์ของประกาศโดยแอดมิน (เปลี่ยนจาก VIP เป็น ทั่วไป หรือกลับกัน)
+        function togglePostTypeByAdmin(id) {
+            const idx = amulets.findIndex(a => a.id === id);
+            if (idx === -1) return;
+
+            const currentType = amulets[idx].postType;
+            if (currentType === "free") {
+                amulets[idx].postType = "vip";
+                // ถ้าเปลี่ยนเป็น VIP แอดมินอาจตรวจสอบและอนุมัติให้เป็น approved ทันที
+                amulets[idx].status = "approved";
+            } else {
+                amulets[idx].postType = "free";
+                amulets[idx].status = "approved";
+                amulets[idx].slipImage = ""; // นำสลิปออก
+            }
+
+            saveToLocalStorage();
+            renderAmulets();
+            updateStats();
+            showCustomToast(`เปลี่ยนประเภทเป็นโพสต์แบบ ${amulets[idx].postType === 'vip' ? 'VIP' : 'ทั่วไป'} แล้ว`, "success");
+        }
+
+        // รีเซ็ตล้างข้อมูลทั้งหมดแล้วกลับไปเป็นค่าตัวอย่างเริ่มต้น
+        function resetToDemoData() {
+            const isConfirm = confirm("คุณแน่ใจหรือไม่ที่จะรีเซ็ตข้อมูลทั้งหมด? โพสต์ที่สร้างใหม่และจำลองสถานะแอดมินของคุณจะสูญหาย");
+            if (isConfirm) {
+                amulets = [...initialAmulets];
+                saveToLocalStorage();
+                renderAmulets();
+                updateStats();
+                showCustomToast("รีเซ็ตระบบเป็นข้อมูลสาธิตเรียบร้อย", "success");
+            }
+        }
+
+        // เปิดดูสลิปโอนเงินในหน้าแอดมิน
+        function viewSlip(slipData) {
+            if (!slipData) {
+                showCustomToast("โพสต์นี้ไม่มีหลักฐานสลิปการโอนเงิน", "error");
+                return;
+            }
+            document.getElementById('slipModalImage').src = slipData;
+            document.getElementById('slipModal').classList.remove('hidden');
+        }
+
+        // ปิดดูสลิปโอนเงิน
+        function closeSlipModal() {
+            document.getElementById('slipModal').classList.add('hidden');
+        }
+
+        // จัดการแสดงตารางของแอดมิน
+        function renderAdminAmuletList() {
+            const tableBody = document.getElementById('admin-amulet-list');
+            const noDataMsg = document.getElementById('admin-no-data');
+            tableBody.innerHTML = "";
+
+            if (amulets.length === 0) {
+                noDataMsg.classList.remove('hidden');
+                return;
+            }
+            noDataMsg.classList.add('hidden');
+
+            amulets.forEach(amulet => {
+                const isPending = amulet.status === 'pending';
+                const isVip = amulet.postType === 'vip';
+                
+                // การกำหนดสัญลักษณ์สถานะ
+                let statusBadge = "";
+                if (isVip) {
+                    if (isPending) {
+                        statusBadge = `<span class="bg-amber-950/80 text-amber-500 border border-amber-500/30 px-2 py-0.5 rounded-full inline-block font-semibold">รออนุมัติสลิป</span>`;
+                    } else {
+                        statusBadge = `<span class="bg-emerald-950/80 text-emerald-400 border border-emerald-400/30 px-2 py-0.5 rounded-full inline-block font-semibold">อนุมัติ VIP แล้ว</span>`;
+                    }
+                } else {
+                    statusBadge = `<span class="bg-blue-950/80 text-blue-400 border border-blue-400/30 px-2 py-0.5 rounded-full inline-block font-semibold">ประกาศฟรีทั่วไป</span>`;
+                }
+
+                // ปุ่มอนุมัติ (จะโชว์เฉพาะโพสต์ VIP ที่รอตรวจสอบสลิปเท่านั้น)
+                const approveButton = (isVip && isPending)
+                    ? `<button onclick="approveVIP('${amulet.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-2 py-1.5 rounded transition shadow">อนุมัติโพสต์</button>`
+                    : ``;
+
+                // ปุ่มดูสลิปโอนเงิน
+                const slipButton = isVip
+                    ? `<button onclick="viewSlip('${amulet.slipImage}')" class="bg-slate-800 hover:bg-slate-700 text-amulet-gold border border-amulet-gold/20 px-2.5 py-1.5 rounded font-bold transition flex items-center justify-center gap-1 mx-auto text-[11px]"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg> ตรวจสลิป</button>`
+                    : `<span class="text-gray-600 block text-center">- ไม่มีสลิป -</span>`;
+
+                // การแสดงผลราคา
+                const priceDisplay = amulet.price === "สอบถามราคา"
+                    ? `สอบถามราคา`
+                    : `${Number(amulet.price).toLocaleString()} บาท`;
+
+                tableBody.innerHTML += `
+                    <tr class="hover:bg-gray-800/50 transition">
+                        <!-- รูปพระเครื่อง -->
+                        <td class="p-4 w-16">
+                            <div class="w-12 h-12 rounded overflow-hidden bg-black flex items-center justify-center border border-gray-700 cursor-pointer" onclick="openDetailModal('${amulet.id}')">
+                                <img src="${amulet.image}" class="w-full h-full object-cover">
+                            </div>
+                        </td>
+                        <!-- ชื่อพระเครื่องและหมวดหมู่ -->
+                        <td class="p-4 max-w-xs">
+                            <div class="font-bold text-gray-200 truncate cursor-pointer hover:text-amulet-gold transition" onclick="openDetailModal('${amulet.id}')">${amulet.name}</div>
+                            <div class="text-[10px] text-gray-500 mt-0.5">${amulet.category} • <span class="text-green-500">${priceDisplay}</span></div>
+                        </td>
+                        <!-- ประเภทโพสต์ -->
+                        <td class="p-4 font-semibold text-center">
+                            <button onclick="togglePostTypeByAdmin('${amulet.id}')" class="px-2 py-1 rounded transition text-[10px] ${isVip ? 'bg-amber-500/10 text-amulet-gold border border-amulet-gold/30' : 'bg-gray-800 text-gray-400 border border-gray-700'} hover:bg-gray-700" title="คลิกเพื่อสลับสถานะ">
+                                ${isVip ? '✨ VIP' : '✏️ ทั่วไป'}
+                            </button>
+                        </td>
+                        <!-- ข้อมูลติดต่อผู้ขาย -->
+                        <td class="p-4">
+                            <div class="font-semibold text-gray-300 text-[11px]">${amulet.sellerName}</div>
+                            <div class="text-[10px] text-gray-500 mt-0.5">${amulet.contact}</div>
+                        </td>
+                        <!-- สถานะการตรวจสอบ -->
+                        <td class="p-4 whitespace-nowrap">
+                            ${statusBadge}
+                        </td>
+                        <!-- สลิป/พรีวิว -->
+                        <td class="p-4">
+                            ${slipButton}
+                        </td>
+                        <!-- จัดการระบบแอดมิน -->
+                        <td class="p-4 text-center">
+                            <div class="flex items-center justify-center gap-1.5">
+                                ${approveButton}
+                                <button onclick="deletePostByAdmin('${amulet.id}')" class="bg-red-950/80 text-red-400 hover:bg-red-900 border border-red-500/20 px-2 py-1.5 rounded transition text-[11px] font-semibold">ลบประกาศ</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // ==========================================
+        //  หมวดฟังก์ชันทั่วไป (GENERAL VISITOR FUNCTIONS)
+        // ==========================================
+
+        // เปิดแสดงโมดอลข้อมูลพระเครื่องแบบละเอียด
+        function openDetailModal(id) {
+            const amulet = amulets.find(a => a.id === id);
+            if (!amulet) return;
+
+            const isVip = amulet.postType === 'vip';
+            const priceDisplay = amulet.price === "สอบถามราคา" 
+                ? `<span class="text-amulet-gold font-bold text-2xl">สอบถามราคา</span>`
+                : `<span class="text-green-400 font-bold text-3xl">${Number(amulet.price).toLocaleString()} <span class="text-sm font-normal text-gray-400">บาท</span></span>`;
+
+            // ดึงเบอร์โทรและ Line ออกมาเพื่อใช้ทำปุ่มโทรออกด่วน
+            const contactText = amulet.contact;
+            const phoneMatch = contactText.match(/\d{3}-\d{3}-\d{4}/) || contactText.match(/\d{10}/);
+            const phoneNumber = phoneMatch ? phoneMatch[0].replace(/-/g, '') : '';
+            const isPhoneAvailable = phoneNumber.length >= 9;
+
+            const certDisplay = amulet.hasCert 
+                ? `<span class="bg-emerald-950 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                    🎖️ พระแท้มีบัตรรับรอง (Verified Cert)
+                   </span>` 
+                : '';
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-4">
+                    <!-- ซีกซ้าย: โชว์รูปพระเครื่อง -->
+                    <div class="md:col-span-6 flex flex-col items-center justify-center bg-black/40 rounded-xl p-2 border border-gray-800">
+                        <img src="${amulet.image}" alt="${amulet.name}" class="max-h-[380px] w-full object-contain rounded-lg">
+                    </div>
+                    
+                    <!-- ซีกขวา: รายละเอียดเนื้อหา -->
+                    <div class="md:col-span-6 flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="bg-amulet-gold/10 text-amulet-gold border border-amulet-gold/30 px-3 py-1 rounded-full text-xs font-semibold">${amulet.category}</span>
+                                ${isVip ? `<span class="vip-badge text-amulet-dark text-[10px] font-extrabold px-2.5 py-1 rounded shadow-md">✨ VIP พรีเมียม</span>` : ''}
+                                ${certDisplay}
+                            </div>
+                            <h3 class="text-xl font-bold text-white leading-tight">${amulet.name}</h3>
+                            
+                            <div class="bg-amulet-dark/60 p-3.5 rounded-xl border border-gray-800">
+                                <p class="text-xs text-gray-400 font-bold mb-1">รายละเอียดและเงื่อนไขรับประกัน</p>
+                                <p class="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap">${amulet.details}</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 pt-3 border-t border-gray-800">
+                            <div>
+                                <span class="text-xs text-gray-500 block">ราคาเปิดบูชา</span>
+                                ${priceDisplay}
+                            </div>
+                            
+                            <div class="bg-amber-950/20 border border-amulet-gold/20 p-3.5 rounded-xl space-y-2">
+                                <p class="text-xs font-bold text-amulet-gold">ข้อมูลผู้ติดต่อและต่อรองราคา</p>
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div>
+                                        <span class="text-gray-400 block">ชื่อผู้ขาย:</span>
+                                        <span class="font-bold text-white text-sm">${amulet.sellerName}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-400 block">เบอร์โทร / Line:</span>
+                                        <span class="font-bold text-emerald-400 text-sm">${amulet.contact}</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 flex gap-2">
+                                    ${isPhoneAvailable ? `
+                                        <a href="tel:${phoneNumber}" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-center font-bold py-2 rounded-lg text-xs flex items-center justify-center gap-1.5 transition">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                            กดโทรหาผู้ขาย
+                                        </a>
+                                    ` : ''}
+                                    <button onclick="document.execCommand('copy'); showCustomToast('คัดลอกเบอร์โทร / Line เรียบร้อยแล้ว', 'success');" class="flex-1 bg-slate-800 hover:bg-slate-700 text-gray-200 font-bold py-2 rounded-lg text-xs flex items-center justify-center gap-1.5 transition">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                        คัดลอกช่องทางติดต่อ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-[10px] text-gray-500 mt-6 text-right">วันที่โพสต์: ${amulet.timestamp}</div>
+            `;
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        // ปิดแสดงโมดอลข้อมูลพระเครื่อง
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        // ฟังก์ชันระบบจำลองหน้าต่าง Toast แจ้งเตือนพรีเมียม
+        function showCustomToast(message, type = "success") {
+            const toast = document.createElement("div");
+            toast.className = `fixed bottom-4 right-4 z-50 flex items-center gap-2 px-5 py-3.5 rounded-xl shadow-2xl transition duration-500 transform translate-y-10 opacity-0 ${
+                type === 'success' 
+                    ? 'bg-gradient-to-r from-amulet-panel to-amber-950/80 border border-amulet-gold/50 text-amulet-gold' 
+                    : 'bg-red-950 border border-red-500 text-red-100'
+            }`;
+            
+            toast.innerHTML = `
+                ${type === 'success' 
+                    ? `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+                    : `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`
+                }
+                <span class="text-sm font-semibold">${message}</span>
+            `;
+
+            document.body.appendChild(toast);
+            
+            // ยิงเอฟเฟกต์เฟดอิน
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 100);
+
+            // เฟดเอาต์และทำลาย
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 500);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
